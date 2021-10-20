@@ -1,11 +1,11 @@
-# PlayLang
+# ExpLang
 
 A generic React component to create playgrounds to explore any programming language.
 
 ## Usage
 
 ```typescript
-import { Playground, ButtonActions, Samples } from 'playlang';
+import { Playground, ButtonActions, Samples } from 'explang';
 
 // create as many actions as needed, they will be turned into buttons in the top bar
 // here we create two buttons to run and disassemble a piece of code
