@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import AceEditor from "react-ace";
+import * as AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-text";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
@@ -13,7 +13,7 @@ export const Console: FC<ConsoleProps> = ({ text }) => {
   const { editorTheme } = useContext(ThemeContext);
 
   return (
-    <AceEditor
+    <AceEditor.default
       mode='text'
       width={'100vw'}
       height={'calc(100vh - 39px)'}

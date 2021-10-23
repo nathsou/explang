@@ -4,24 +4,33 @@ A generic React component to create playgrounds to explore any programming langu
 
 ## Usage
 
+Add the following peer dependencies to your `package.json`'s devDependencies :
+
+```json
+"@geoffcox/react-splitter": "^2.1.0",
+"ace-builds": "^1.4.12",
+"react-ace": "^9.4.0"
+```
+
 ```typescript
 import { Playground, ButtonActions, Samples } from 'explang';
 
 // create as many actions as needed, they will be turned into buttons in the top bar
 // here we create two buttons to run and disassemble a piece of code
-// an action can return : string | PromiseLike<string> | Iterable<string> | AsyncIterable<string>
 const actions: ButtonActions = {
-  async *Run(code: string) {
-    yield 'running...';
+  Run: async (code, setOutput) => {
+    setOutput('running...');
     const res = await compile(code);
 
     if (res.isSuccess) {
-      yield await run(res.output);
+      setOutput(await run(res.output));
     } else {
-      yield `Error: ${res.error}`;
+      setOutput(`Error: ${res.error}`);
     }
   },
-  Disassemble: async code => await disassemble(code),
+  Disassemble: async (code, setOutput) => {
+    setOutput(await disassemble(code));
+  },
 };
 
 const samples: Samples = {
