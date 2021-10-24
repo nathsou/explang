@@ -28,7 +28,7 @@ export const Panel: FC<PanelProps> = ({
     }}
   >
     <Actions actions={actions} onClick={onAction} />
-    <SampleSelector samples={samples} onSelect={onSelectSample} defaultSample='Prime sieve' />
+    <SampleSelector samples={samples} onSelect={onSelectSample} />
     <Button onClick={toggleDarkMode}>{`${isDark ? 'Light' : 'Dark'} Mode`}</Button>
   </div>;
 };

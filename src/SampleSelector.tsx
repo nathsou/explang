@@ -6,10 +6,10 @@ export type Samples = Record<string, string>;
 interface SampleSelectorProps {
   onSelect: (code: string) => void,
   samples: Samples,
-  defaultSample: string,
+  defaultSample?: string,
 }
 
-export const SampleSelector: FC<SampleSelectorProps> = ({ samples, onSelect, defaultSample }) => {
+export const SampleSelector: FC<SampleSelectorProps> = ({ samples, onSelect, defaultSample = samples[0] }) => {
   const [selectedSample, setSelectedSample] = useState(defaultSample);
   const { style: theme } = useContext(ThemeContext);
 
