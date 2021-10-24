@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 import { Button } from './Button';
 
-export type ButtonAction = (code: string, setOutput: (output: string) => void) => void | Promise<void>;
+export type ButtonAction = (
+  code: string,
+  setOutput: (output: string) => void
+) => void | Promise<void>;
+
 export type ButtonActions = Record<string, ButtonAction>;
 
 interface ActionProps {

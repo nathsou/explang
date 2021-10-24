@@ -17,37 +17,48 @@ const commonStyles = {
   borderRadius: '4px',
 };
 
-const mode = {
-  dark: {
-    style: {
-      backgroundColor: '#1c1c1c',
-      color: 'white',
-      borderColor: '#3b3b3b',
-      ...commonStyles,
-    },
-    editorTheme: 'terminal',
-  },
-  light: {
-    style: {
-      backgroundColor: 'white',
-      color: 'black',
-      borderColor: 'black',
-      ...commonStyles,
-    },
-    editorTheme: 'github',
-  },
+const getTheme = (
+  isDark: boolean,
+  darkTheme = 'terminal',
+  lightTheme = 'github'
+) => {
+  if (isDark) {
+    return {
+      style: {
+        backgroundColor: '#1c1c1c',
+        color: 'white',
+        borderColor: '#3b3b3b',
+        ...commonStyles,
+      },
+      editorTheme: darkTheme,
+    };
+  } else {
+    return {
+      style: {
+        backgroundColor: 'white',
+        color: 'black',
+        borderColor: 'black',
+        ...commonStyles,
+      },
+      editorTheme: lightTheme,
+    };
+  }
 };
 
 export const ThemeContext = createContext({
-  ...mode.dark,
+  ...getTheme(true),
   isDark: true,
   setIsDark: (_isDark: boolean) => { },
 });
 
-export const ThemeProvider: FC<{}> = ({ children }) => {
+export const ThemeProvider: FC<{ lightTheme?: string, darkTheme?: string }> = ({
+  children,
+  lightTheme,
+  darkTheme
+}) => {
   const [isDark, setIsDark] = useState(isDarkMode);
   const context = useMemo(() => {
-    const theme = mode[isDark ? 'dark' : 'light'];
+    const theme = getTheme(isDark, darkTheme, lightTheme);
 
     return {
       isDark,

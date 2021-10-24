@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import AceEditor, { IAceEditorProps } from "react-ace";
+import AceEditor, { IAceEditorProps, IAceOptions } from "react-ace";
 import "ace-builds/src-noconflict/mode-rust";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
@@ -9,14 +9,20 @@ export interface EditorProps {
   code: string,
   onChange: (newCode: string) => void,
   aceMode: IAceEditorProps['mode'],
+  options?: IAceOptions,
 }
 
-export const Editor: FC<EditorProps> = ({ code, onChange }) => {
+export const Editor: FC<EditorProps> = ({
+  code,
+  aceMode,
+  onChange,
+  options = { tabSize: 2, showLineNumbers: true }
+}) => {
   const { editorTheme } = useContext(ThemeContext);
 
   return (
     <AceEditor
-      mode='rust'
+      mode={aceMode}
       width={'100vw'}
       height={'calc(100vh - 39px)'}
       value={code}
@@ -25,6 +31,6 @@ export const Editor: FC<EditorProps> = ({ code, onChange }) => {
       onChange={onChange}
       fontSize={16}
       editorProps={{ $blockScrolling: true }}
-      setOptions={{ tabSize: 2 }}
+      setOptions={options}
     />);
 };

@@ -1,6 +1,6 @@
 {
   "name": "explang",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Generic React component to explore any programming language",
   "type": "module",
   "module": "lib/index.js",

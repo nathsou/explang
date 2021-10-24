@@ -1,19 +1,20 @@
 import React, { FC, useContext } from 'react';
-import * as AceEditor from "react-ace";
+import AceEditor, { IAceOptions } from "react-ace";
 import "ace-builds/src-noconflict/mode-text";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
 import { ThemeContext } from './ThemeProvider';
 
 interface ConsoleProps {
-  text: string
+  text: string,
+  options?: IAceOptions,
 }
 
-export const Console: FC<ConsoleProps> = ({ text }) => {
+export const Console: FC<ConsoleProps> = ({ text, options = { tabSize: 2 } }) => {
   const { editorTheme } = useContext(ThemeContext);
 
   return (
-    <AceEditor.default
+    <AceEditor
       mode='text'
       width={'100vw'}
       height={'calc(100vh - 39px)'}
@@ -23,6 +24,6 @@ export const Console: FC<ConsoleProps> = ({ text }) => {
       onChange={() => null}
       fontSize={16}
       editorProps={{ $blockScrolling: true }}
-      setOptions={{ showLineNumbers: true, tabSize: 2 }}
+      setOptions={options}
     />);
 };
