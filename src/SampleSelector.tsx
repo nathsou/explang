@@ -9,7 +9,11 @@ interface SampleSelectorProps {
   defaultSample?: string,
 }
 
-export const SampleSelector: FC<SampleSelectorProps> = ({ samples, onSelect, defaultSample = samples[0] }) => {
+export const SampleSelector: FC<SampleSelectorProps> = ({
+  samples,
+  onSelect,
+  defaultSample = Object.keys(samples)[0]
+}) => {
   const [selectedSample, setSelectedSample] = useState(defaultSample);
   const { style: theme } = useContext(ThemeContext);
 
